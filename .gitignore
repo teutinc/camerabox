@@ -1,0 +1,10 @@
+*.iml
+.idea
+.DS_Store
+.gradletasknamecache
+build
+target
+.gradle
+*.log
+node_modules
+bower_components
