@@ -1,0 +1,41 @@
+<div ng-controller="QuestionBoxActivityEditCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome</h3>
+        </div>
+        <div class="panel-body">
+            <div cb-input-template ng-model="activity.welcome.template" contents="contents"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Questions</h3>
+        </div>
+        <div class="panel-body">
+            <button type="button" class="btn btn-info" ng-click="newQuestion()">NEW</button>
+            <ul ui-sortable="questionsOptions" ng-model="activity.questions" class="question-list">
+                <li ng-repeat="question in activity.questions" class="question-list-item">
+                    <span class="question-detail">#{{$index}} - {{questionToString(question)}}</span>
+                        <span class="question-actions">
+                            <button type="button" class="btn btn-warning" ng-click="editQuestion(question)">EDIT</button>
+                            <button type="button" class="btn btn-danger" ng-click="deleteQuestion(question)">DELETE</button>
+                        </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Bye <input id="defineBye" type="checkbox" ng-model="defineBye"></h3>
+        </div>
+        <div ng-if="defineBye" class="panel-body">
+            <div cb-input-template ng-model="activity.bye.template" contents="contents"></div>
+            <div class="form-group">
+                <label for="byeDelay">Delay (in seconds)</label>
+                <input id="byeDelay" class="form-control" type="number" ng-model="activity.bye.duration" cb-second-transformer>
+            </div>
+        </div>
+    </div>
+</div>

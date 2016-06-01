@@ -1,0 +1,25 @@
+<button class="btn btn-info add-activity" ng-click="create()">NEW</button>
+<br>
+<br>
+<table class="table table-striped table-bordered activities">
+    <tr>
+        <th></th>
+        <th>id</th>
+        <th>name</th>
+        <th>type</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="activity in activities">
+        <td>
+            <button class="btn btn-success" ng-click="start(activity)" ng-disabled="activity.running">PLAY</button>
+            <button class="btn btn-danger" ng-click="stop(activity)" ng-disabled="!activity.running">STOP</button>
+        </td>
+        <td>{{activity.id.substring(0, 8)}}</td>
+        <td>{{activity.name}}</td>
+        <td>{{activity.type}}</td>
+        <td>
+            <button class="btn btn-warning" ng-click="edit(activity)">EDIT</button>
+            <button class="btn btn-danger" ng-click="delete(activity)">DELETE</button>
+        </td>
+    </tr>
+</table>

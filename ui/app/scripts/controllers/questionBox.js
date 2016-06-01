@@ -1,0 +1,24 @@
+'use strict';
+
+angular.module('photoboothApp')
+    .controller('QuestionBoxCtrl', ['$scope', 'photoBooth', 'timer', function ($scope, photoBooth, timer) {
+        // display configuration
+        $scope.display = {};
+
+        console.log('photoBooth in ctrl...');
+        console.dir(photoBooth);
+
+        // the current question state
+        $scope.question = photoBooth;
+
+        // create a timer, each time there is a new state with a delay in it
+        $scope.$watch('question.state', function() {
+            if ($scope.question.state && $scope.question.state.delay && $scope.question.state.delay > 0) {
+                $scope.question.state.timer = timer.createTimer($scope.question.state.delay / 1000);
+                $scope.display.showQuestionDelay = true;
+            } else {
+                $scope.display.showQuestionDelay = false;
+            }
+            $scope.display.showQuestionNumber = $scope.question.state.step === 'question';
+        })
+    }]);

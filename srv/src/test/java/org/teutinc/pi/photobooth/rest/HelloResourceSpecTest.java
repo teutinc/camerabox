@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import restx.tests.RestxSpecTestsRunner;
 import restx.tests.FindSpecsIn;
 
-@RunWith(RestxSpecTestsRunner.class)
-@FindSpecsIn("specs/hello")
+//@RunWith(RestxSpecTestsRunner.class)
+//@FindSpecsIn("specs/hello")
 public class HelloResourceSpecTest {
 
     /**

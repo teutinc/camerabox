@@ -12,4 +12,22 @@
         <servlet-name>restx</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PhotoBoothWebSocketServlet</servlet-name>
+        <servlet-class>org.teutinc.pi.photobooth.websocket.PhotoBoothWebSocketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotoBoothWebSocketServlet</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
+
+    <!--fixme remove, as its useless-->
+    <!--<servlet>-->
+        <!--<servlet-name>FileUploadServlet</servlet-name>-->
+        <!--<servlet-class>org.teutinc.pi.photobooth.upload.FileUploadServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>FileUploadServlet</servlet-name>-->
+        <!--<url-pattern>/upload/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 </web-app>

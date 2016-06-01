@@ -1,21 +1,33 @@
 package org.teutinc.pi.photobooth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.google.common.base.Charsets;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
 import restx.config.ConfigLoader;
 import restx.config.ConfigSupplier;
-import restx.factory.Provides;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableSet;
+import restx.factory.*;
+import restx.jackson.FrontObjectMapperFactory;
 import restx.security.*;
-import restx.factory.Module;
-import restx.factory.Provides;
-import javax.inject.Named;
 
+import javax.inject.Named;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 @Module
 public class AppModule {
+    private static final Logger logger = getLogger(AppModule.class);
+
     @Provides
     public SignatureKey signatureKey() {
          return new SignatureKey("photobooth a4193742-3c1b-40e9-b58f-6195234045cf 6391424401974414353 photobooth".getBytes(Charsets.UTF_8));
@@ -29,8 +41,7 @@ public class AppModule {
 
     @Provides
     public ConfigSupplier appConfigSupplier(ConfigLoader configLoader) {
-        // Load settings.properties in org.teutinc.pi.photobooth package as a set of config entries
-        return configLoader.fromResource("org/teutinc/pi/photobooth/settings");
+        return configLoader.fromResource("camerabox");
     }
 
     @Provides
@@ -70,5 +81,49 @@ public class AppModule {
                         true),
                 credentialsStrategy, defaultAdminPasswordHash),
                 securitySettings);
+    }
+
+    @Provides
+    public CORSAuthorizer corsAuthorizer() {
+        return StdCORSAuthorizer.builder()
+                .setOriginMatcher(Predicates.<CharSequence>alwaysTrue())
+                .setPathMatcher(Predicates.<CharSequence>alwaysTrue())
+                .setAllowedMethods(ImmutableList.of("GET", "PUT", "POST", "DELETE"))
+                .setAllowedHeaders(ImmutableList.of("accept", "content-type"))
+                .build();
+    }
+
+    @Provides
+    public ComponentCustomizerEngine customizeObjectMapper() {
+        return new SingleComponentNameCustomizerEngine<ObjectMapper>(-10000, FrontObjectMapperFactory.NAME) {
+            @Override
+            public NamedComponent<ObjectMapper> customize(NamedComponent<ObjectMapper> namedComponent) {
+                namedComponent.getComponent()
+                              .registerModule(new Jdk8Module())
+                              .registerModule(new GuavaModule());
+                return namedComponent;
+            }
+        };
+    }
+
+    @Provides(priority = -10000)
+    public AutoStartable cleanTempPath(AppSettings settings) {
+        return () -> {
+            final Path tempPath = Paths.get(settings.uploadTempPath());
+            if (Files.isDirectory(tempPath)) {
+                try (Stream<Path> list = Files.list(tempPath)) {
+                    list.map(Path::toFile)
+                        .forEach((file) -> {
+                            try {
+                                FileUtils.forceDelete(file);
+                            } catch (IOException e) {
+                                logger.warn("unable to delete: " + file, e);
+                            }
+                        });
+                } catch (IOException e) {
+                    logger.warn("unable to delete temporary upload directory contents: " + tempPath, e);
+                }
+            }
+        };
     }
 }
