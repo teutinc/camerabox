@@ -1,5 +1,5 @@
 <div class="question" ng-if="question.state">
-    <div ng-include="'views/question_templates/' + question.state.template.type + '.html'"></div>
+    <div class="question-template" ng-include="'views/question_templates/' + question.state.template.type + '.html'"></div>
     <div class="question-number" ng-show="display.showQuestionNumber">{{question.state.number + 1}}/{{question.state.total}}</div>
     <div class="question-delay" ng-show="display.showQuestionDelay">{{question.state.timer.time}}</div>
 </div>

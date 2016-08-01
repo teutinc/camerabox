@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .controller('ActivitiesCtrl', ['$scope', '$location', 'activities', function ($scope, $location, activities) {
         var refreshActivities = function () {
             activities.list().then(function (list) {

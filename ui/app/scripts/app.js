@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothApp', [
+angular.module('cameraboxApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -25,26 +25,49 @@ angular.module('photoboothApp', [
                 redirectTo: '/'
             });
     })
-    .factory('photoBooth', ['$websocket', '$location', '$timeout', function($websocket, $location, $timeout) {
-        var photoBooth = {};
+    .factory('cameraBox', ['$websocket', '$location', '$timeout', function($websocket, $location, $timeout) {
+        var cameraBox = {};
 
-        // init with a small delay, in order to let some time to display the bootstrap screen
-        $timeout(function () {
-            var dataStream = $websocket('ws://' + $location.host() + ':8080/ws');
+        var dataStream;
+        var alive = 'alive';
+
+        var connect = function() {
+            dataStream = $websocket('ws://' + $location.host() + ':8080/ws');
             dataStream.onMessage(function(message) {
-                console.log('message received:');
-                console.dir(message);
-                photoBooth.state = JSON.parse(message.data);
-                if (photoBooth.state.activity) {
-                    $location.url('/' + photoBooth.state.activity);
+                if (message.data === 'pong') {
+                    alive = 'alive';
+                }
+                cameraBox.state = JSON.parse(message.data);
+                if (cameraBox.state.activity) {
+                    $location.url('/' + cameraBox.state.activity);
                 } else {
                     console.warn('received message, does not contains any activity!');
                     console.dir(localState);
                 }
             });
-        }, 2000);
+        };
 
-        return photoBooth;
+        var keepAlive = function () {
+            if (!alive) {
+                connect();
+            } else {
+                alive = undefined;
+            }
+            dataStream.send('ping')
+        };
+
+        var sendKeepAlive = function() {
+            // send keep alive, every 3s
+            $timeout(function () {
+                keepAlive();
+                sendKeepAlive();
+            }, 3000);
+        };
+
+        connect();
+        sendKeepAlive();
+
+        return cameraBox;
     }])
     .factory('timer', ['$timeout', function($timeout) {
 

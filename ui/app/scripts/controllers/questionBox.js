@@ -1,15 +1,12 @@
 'use strict';
 
-angular.module('photoboothApp')
-    .controller('QuestionBoxCtrl', ['$scope', 'photoBooth', 'timer', function ($scope, photoBooth, timer) {
+angular.module('cameraboxApp')
+    .controller('QuestionBoxCtrl', ['$scope', 'cameraBox', 'timer', function ($scope, cameraBox, timer) {
         // display configuration
         $scope.display = {};
 
-        console.log('photoBooth in ctrl...');
-        console.dir(photoBooth);
-
         // the current question state
-        $scope.question = photoBooth;
+        $scope.question = cameraBox;
 
         // create a timer, each time there is a new state with a delay in it
         $scope.$watch('question.state', function() {

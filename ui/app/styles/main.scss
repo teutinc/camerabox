@@ -66,3 +66,9 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
   color: #ddd;
 }
 
+.question-template {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+

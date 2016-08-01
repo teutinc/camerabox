@@ -1,12 +1,12 @@
 {
-    "module": "org.teutinc.pi:photobooth:0.1-SNAPSHOT",
+    "module": "org.teutinc.pi:camerabox:0.1-SNAPSHOT",
     "packaging": "war",
 
     "properties": {
         "java.version": "1.8",
         "restx.version": "0.34",
         "project.war.overlay.groupId": "org.teutinc.pi",
-        "project.war.overlay.artifactId": "photobooth"
+        "project.war.overlay.artifactId": "camerabox"
     },
     "fragments": {
         "maven": [
@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "compile": [
-            "org.teutinc.pi:photobooth-ui:0.1-SNAPSHOT:zip",
+            "org.teutinc.pi:camerabox-ui:0.1-SNAPSHOT:zip",
             "io.restx:restx-core:${restx.version}",
             "io.restx:restx-security-basic:${restx.version}",
             "io.restx:restx-core-annotation-processor:${restx.version}",

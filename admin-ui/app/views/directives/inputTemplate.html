@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label for="type">Template type</label>
+    <select id="type" class="form-control" ng-model="template.type" ng-options="type for type in availableTemplateTypes" required>
+        <option value="">-- chose a type --</option>
+    </select>
+</div>
+
+<div ng-if="template.type" ng-include="'views/templates/' + template.type + 'Template.html'"></div>

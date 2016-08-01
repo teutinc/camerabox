@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .directive('cbImageInput', ['$location', 'FileUploader', 'DefaultPort', function($location, FileUploader, DefaultPort) {
         return {
             restrict: 'AE',
@@ -8,7 +8,7 @@ angular.module('photoboothAdminApp')
                 image: '=ngModel',
                 contents: '=contents'
             },
-            templateUrl: 'scripts/directives/imageInput.html',
+            templateUrl: 'views/directives/imageInput.html',
             compile: function () {
                 return {
                     pre: function (scope) {

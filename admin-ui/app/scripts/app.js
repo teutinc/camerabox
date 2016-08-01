@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp', [
+angular.module('cameraboxAdminApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',

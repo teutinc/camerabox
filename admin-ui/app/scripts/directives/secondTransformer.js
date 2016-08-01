@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .directive('cbSecondTransformer', function() {
         return {
             restrict: 'A',

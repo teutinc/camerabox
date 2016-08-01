@@ -2,30 +2,70 @@
 
 if [ -z $1 ] 
 then
-	echo "specify host where to deploy, as first argument!"
-	exit -1
+	echo "specify host where to deploy, as first argument!";
+	exit -1;
 fi 
 
-dir=/opt/dev/java/photobooth/prod/photobooth
+deploy_srv=0;
+deploy_ui=0;
+deploy_admin=0;
+if [ -z $2 ]
+then
+	deploy_srv=1;
+	deploy_ui=1;
+	deploy_admin=1;
+else
+	if [[ $2 == *"srv"* ]]
+	then
+  	deploy_srv=1;
+	fi
+	if [[ $2 == *"ui"* ]]
+	then
+  	deploy_ui=1;
+	fi
+	if [[ $2 == *"admin"* ]]
+	then
+  	deploy_admin=1;
+	fi
+fi
+
+dir=$(dirname $0)
 current=$(pwd)
 
-# srv packaging
-rm -f $dir/srv.tgz
-cd $dir/srv
-mvn compile dependency:copy-dependencies -DincludeScope=compile
-cd $current
-tar cfz $dir/srv.tgz -C $dir/srv/target .
+# cleanup
+rm -rf $dir/dist
+mkdir $dir/dist
 
-# ui packaging
-rm -f $dir/ui.tgz $dir/admin-ui.tgz
-tar cfz $dir/ui.tgz -C $dir/ui/dist .
-tar cfz $dir/admin-ui.tgz -C $dir/admin-ui/dist .
+# srv packaging and deployment
+if [ $deploy_srv = 1 ]
+then
+	cd $dir/srv
+	mvn compile dependency:copy-dependencies -DincludeScope=compile
+	cd $current
+	tar cfz $dir/dist/srv.tgz -C $dir/srv/target .
+	scp $dir/dist/srv.tgz $1:/opt/camerabox
+fi
 
-# deployment of packages 
-scp $dir/srv.tgz $1:/opt/camerabox
-scp $dir/ui.tgz $1:/opt/camerabox
-scp $dir/admin-ui.tgz $1:/opt/camerabox
+# ui packaging and deployment
+if [ $deploy_ui = 1 ]
+then
+	cd $dir/ui
+	grunt build
+	cd $current
+	tar cfz $dir/dist/ui.tgz -C $dir/ui/dist .
+	scp $dir/dist/ui.tgz $1:/opt/camerabox
+fi
+
+# admin packaging and deployment
+if [ $deploy_admin = 1 ]
+then
+	cd $dir/admin-ui
+	grunt build
+	cd $current
+	tar cfz $dir/dist/admin-ui.tgz -C $dir/admin-ui/dist .
+	scp $dir/dist/admin-ui.tgz $1:/opt/camerabox
+fi
 
 # launch remote install
-ssh $1 /opt/camerabox/install.sh
+ssh $1 /opt/camerabox/install.sh $2
 

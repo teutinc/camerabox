@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .controller('QuestionBoxActivityEditCtrl', ['$scope', '$uibModal', 'FileUploader', function ($scope, $uibModal) {
         $scope.questionToString = function (question) {
             var label = question.template.type + ': ';
@@ -15,7 +15,7 @@ angular.module('photoboothAdminApp')
 
         $scope.newQuestion = function () {
             var modalInstance = $uibModal.open({
-                templateUrl: '/views/forms/questionEditModal.html',
+                templateUrl: 'views/forms/questionEditModal.html',
                 controller: 'QuestionEditModalInstanceCtrl',
                 resolve: {
                     question: function () {
@@ -38,7 +38,7 @@ angular.module('photoboothAdminApp')
         $scope.editQuestion = function (question) {
             var editedQuestion = question;
             var modalInstance = $uibModal.open({
-                templateUrl: '/views/forms/questionEditModal.html',
+                templateUrl: 'views/forms/questionEditModal.html',
                 controller: 'QuestionEditModalInstanceCtrl',
                 resolve: {
                     question: function () {

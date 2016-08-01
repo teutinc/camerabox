@@ -5,32 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.teutinc.pi</groupId>
-    <artifactId>photobooth</artifactId>
+    <artifactId>camerabox</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>photobooth</name>
+    <name>camerabox</name>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <restx.version>0.34</restx.version>
         <project.war.overlay.groupId>org.teutinc.pi</project.war.overlay.groupId>
-        <project.war.overlay.artifactId>photobooth</project.war.overlay.artifactId>
+        <project.war.overlay.artifactId>camerabox</project.war.overlay.artifactId>
     </properties>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>org.teutinc.pi</groupId>-->
-            <!--<artifactId>photobooth-ui</artifactId>-->
-            <!--<version>0.1-SNAPSHOT</version>-->
-            <!--<type>zip</type>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.teutinc.pi</groupId>-->
-            <!--<artifactId>photobooth-admin-ui</artifactId>-->
-            <!--<version>0.1-SNAPSHOT</version>-->
-            <!--<type>zip</type>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.teutinc.pi</groupId>
+            <artifactId>camerabox-ui</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.teutinc.pi</groupId>
+            <artifactId>camerabox-admin-ui</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <type>zip</type>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

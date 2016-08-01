@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothApp')
+angular.module('cameraboxApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'RESTX',

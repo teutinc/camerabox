@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .controller('EditCtrl', ['$scope', '$location', '$routeParams', 'activities', function ($scope, $location, $routeParams, activities) {
 
         /*

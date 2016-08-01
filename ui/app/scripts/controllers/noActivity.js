@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothApp')
-  .controller('NoActivityCtrl', ['$scope', 'photoBooth', function ($scope, photoBooth) {
+angular.module('cameraboxApp')
+  .controller('NoActivityCtrl', ['$scope', 'cameraBox', function ($scope, cameraBox) {
 
   }]);

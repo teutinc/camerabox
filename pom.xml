@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.teutinc.pi</groupId>
-    <artifactId>photobooth-parent</artifactId>
+    <artifactId>camerabox-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 

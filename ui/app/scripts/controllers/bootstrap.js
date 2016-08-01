@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothApp')
-  .controller('BootstrapCtrl', ['$scope', 'photoBooth', function ($scope, photoBooth) {
+angular.module('cameraboxApp')
+  .controller('BootstrapCtrl', ['$scope', 'cameraBox', function ($scope, cameraBox) {
 
   }]);

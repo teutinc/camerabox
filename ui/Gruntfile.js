@@ -179,7 +179,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= layout.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= layout.dist %>/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= layout.app %>/images',
         javascriptsDir: '<%= layout.app %>/scripts',
@@ -310,6 +310,7 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
+            'scripts/**/*',
             'fonts/*'
           ]
         }, {
@@ -410,18 +411,18 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
-    'useminPrepare',
+    //'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
+    //'autoprefixer',
+    //'concat',
+    //'ngmin',
     'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin',
-    'htmlmin'
+    //'cdnify',
+    //'cssmin',
+    //'uglify',
+    //'rev',
+    //'usemin',
+    //'htmlmin'
   ]);
 
   grunt.registerTask('default', [

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('photoboothAdminApp')
+angular.module('cameraboxAdminApp')
     .directive('cbInputTemplate', [function() {
         return {
             restrict: 'AE',
@@ -8,7 +8,7 @@ angular.module('photoboothAdminApp')
                 template: '=ngModel',
                 contents: '=contents'
             },
-            templateUrl: 'scripts/directives/inputTemplate.html',
+            templateUrl: 'views/directives/inputTemplate.html',
             link: function(scope) {
                 scope.availableTemplateTypes = ['singleText', 'singleImage', 'textAndImage'];
             }
