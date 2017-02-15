@@ -1,0 +1,18 @@
+# camerabox ui
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    location /ui {
+        root /opt/camerabox;
+    }
+
+    location /admin-ui {
+        root /opt/camerabox;
+    }
+
+    location /activities {
+        root /opt/camerabox;
+    }
+}
