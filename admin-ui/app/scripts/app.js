@@ -28,7 +28,7 @@ angular.module('cameraboxAdminApp', [
                 redirectTo: '/'
             });
     })
-    .constant('DefaultPort', '8080')
+    .constant('DefaultPort', '80')
     .factory('activities', ['$http', '$location', 'DefaultPort', function ($http, $location, DefaultPort) {
         var url = 'http://' + $location.host() + ':' + DefaultPort + '/api/activities';
         return {
