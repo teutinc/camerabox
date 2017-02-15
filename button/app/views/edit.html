@@ -1,0 +1,26 @@
+<form name="newActivityForm" ng-submit="save()">
+    <h1 ng-if="creation">Create new activity: {{activity.name}}</h1>
+    <h1 ng-if="!creation">Edit activity: {{activity.name}} ({{activity.id}})</h1>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" class="form-control" type="text" ng-model="activity.name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="type">Type</label>
+        <select id="type" class="form-control" ng-model="activity.type" ng-options="type for type in availableTypesNames" ng-disabled="!creation" required >
+            <option value="">-- chose a type --</option>
+        </select>
+    </div>
+
+    <div ng-if="activity.type">
+        <hr>
+        <div ng-include="'views/forms/' + activity.type + 'Form.html'"></div>
+    </div>
+
+    <div class="validation-buttons">
+        <button type="button" class="btn btn-danger validation-button" ng-click="cancelEdit()">CANCEL</button>
+        <button type="submit" class="btn btn-success validation-button">SAVE</button>
+    </div>
+</form>

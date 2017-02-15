@@ -12,6 +12,7 @@
     <modules>
         <module>ui</module>
         <module>admin-ui</module>
+        <module>button</module>
         <module>srv</module>
     </modules>
 </project>

@@ -16,6 +16,10 @@ server {
         root /opt/camerabox;
     }
 
+    location /button {
+        root /opt/camerabox;
+    }
+
     location /api/ {
         proxy_pass http://127.0.0.1:8080/api/;
     }

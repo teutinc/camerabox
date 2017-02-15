@@ -1,0 +1,12 @@
+$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+
+@import 'sass-bootstrap/lib/bootstrap';
+
+.main-button {
+  color: transparent;
+  border: 0;
+  margin-top: 100px;
+  width: 574px;
+  height: 300px;
+  background: url('../images/button.png') no-repeat center;
+}

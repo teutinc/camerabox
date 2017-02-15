@@ -3,11 +3,13 @@
 install_srv=0;
 install_ui=0;
 install_admin=0;
+install_button=0;
 if [ -z $2 ]
 then
 	install_srv=1;
 	install_ui=1;
 	install_admin=1;
+	install_button=1;
 else
 	if [[ $2 == *"srv"* ]]
 	then
@@ -20,6 +22,10 @@ else
 	if [[ $2 == *"admin"* ]]
 	then
   	install_admin=1;
+	fi
+	if [[ $2 == *"button"* ]]
+	then
+  	install_button=1;
 	fi
 fi
 
@@ -47,6 +53,14 @@ then
     if [ -d "$dir/admin-ui" ]; then rm -rf $dir/admin-ui; fi
     mkdir $dir/admin-ui
     tar xfz $dir/admin-ui.tgz -C $dir/admin-ui
+fi
+
+# install button
+if [ $install_button = 1 ]
+then
+    if [ -d "$dir/button" ]; then rm -rf $dir/button; fi
+    mkdir $dir/button
+    tar xfz $dir/button.tgz -C $dir/button
 fi
 
  
